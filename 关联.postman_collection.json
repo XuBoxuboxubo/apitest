@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "a6ba662f-ac61-4609-972c-986ef7ff7c2a",
+		"name": "关联",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取天气接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9384029-97b1-4e34-ab3d-c57b15268001",
+						"exec": [
+							"//获取response的json全数据",
+							"var jsondate = pm.response.json()",
+							"",
+							"//获取response的json的城市信息(weatherinfo.city)",
+							"var city0926 = jsondate.weatherinfo.city",
+							"",
+							"//保存到环境变量",
+							"pm.globals.set(\"g_city0926\", city0926);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.weather.com.cn/data/sk/101010100.html",
+					"protocol": "http",
+					"host": [
+						"www",
+						"weather",
+						"com",
+						"cn"
+					],
+					"path": [
+						"data",
+						"sk",
+						"101010100.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取天气接口 Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.baidu.com/s?wd={{g_city0926}}",
+					"protocol": "http",
+					"host": [
+						"www",
+						"baidu",
+						"com"
+					],
+					"path": [
+						"s"
+					],
+					"query": [
+						{
+							"key": "wd",
+							"value": "{{g_city0926}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
